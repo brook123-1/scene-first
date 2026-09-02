@@ -39,6 +39,18 @@ The privacy boundary depends on both where FastAPI runs and which provider is se
 
 The public UI requests crop-scoped provider calls. The backend API also contains a `cloud_scope=full` compatibility path; using it with an external provider sends the full working image to that provider. Review [PRIVACY.md](PRIVACY.md) before exposing this application to other people.
 
+## Example Output
+
+This example shows selected, human-confirmed faces replaced with illustrated overlays while the rest of the image remains largely unchanged.
+
+![Before and after comparison](docs/media/showcase-before-after.png)
+
+Animated preview:
+
+![Animated before and after preview](docs/media/showcase-before-after.gif)
+
+> Demo images in this repository use safe examples only. This project helps reduce unwanted identity exposure; it does not guarantee anonymity.
+
 ## Architecture
 
 ```mermaid

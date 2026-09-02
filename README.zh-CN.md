@@ -39,6 +39,18 @@ Scene First 先检测人物，再要求用户逐个确认处理对象，最后�
 
 公开 UI 默认要求 crop 范围的 Provider 调用。后端 API 仍保留 `cloud_scope=full` 兼容路径；如果它与外部 Provider 一起使用，完整工作图会发给该 Provider。对外开放服务前请阅读 [PRIVACY.md](PRIVACY.md)。
 
+## 成果展示
+
+下面展示一个简单的处理前后示例：经人工确认的人脸会替换为插画覆盖层，同时尽量保持画面其余部分不变。
+
+![处理前后对比](docs/media/showcase-before-after.png)
+
+动态预览：
+
+![处理前后动态预览](docs/media/showcase-before-after.gif)
+
+> 仓库中的展示图片均使用可安全公开的示例素材。本项目旨在降低不希望公开的身份暴露，但并不保证绝对匿名。
+
 ## 当前架构
 
 ```mermaid
