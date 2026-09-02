@@ -43,7 +43,7 @@
     "@cloudflare/workers-types": "^5.20260727.1",
     "playwright": "^1.55.0",
     "typescript": "^7.0.2",
-    "wrangler": "^4.121.0"
+    "wrangler": "^4.127.1"
   },
   "dependencies": {
     "@cloudflare/containers": "^0.3.7"
