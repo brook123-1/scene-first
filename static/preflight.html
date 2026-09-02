@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>检测预审 · Scene First</title><link rel="stylesheet" href="/static/styles.css">
+  <style>
+    body{min-height:100vh}.preflight-shell{max-width:1500px;margin:auto;padding:28px 4vw 60px}.preflight-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px}.preflight-head h1{font:700 clamp(34px,5vw,68px)/.95 Georgia,"Songti SC",serif;margin:8px 0}.preflight-layout{display:grid;grid-template-columns:310px minmax(0,1fr);border:1px solid var(--line);background:#fff}.preflight-side{padding:24px;border-right:1px solid var(--line)}.preflight-side p{color:var(--muted);line-height:1.7}.keep-note{padding:14px;background:#fff5cf;border:1px solid #dccf91}.preflight-stage{min-height:720px;display:grid;place-items:center;padding:28px;background:#dedfd9}#preflightCanvas{max-width:100%;max-height:760px;box-shadow:0 20px 60px #14201c33;cursor:pointer}#preflightCanvas.manual{cursor:crosshair}.preflight-actions{display:grid;gap:10px;margin-top:22px}.nav-row{display:flex;gap:10px}.nav-row button{flex:1}.legend{font-size:11px;margin-top:14px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.dot.on{background:#baff35}.dot.off{background:#fff;border:1px solid #777}@media(max-width:800px){.preflight-layout{grid-template-columns:1fr}.preflight-side{border-right:0;border-bottom:1px solid var(--line)}.preflight-stage{min-height:480px;padding:12px}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">SF</span><span><strong>Scene First</strong><small>检测预审</small></span></a><a href="/review">盲测评分</a></header>
+  <main class="preflight-shell">
+    <div class="preflight-head"><div><p class="eyebrow">DETECTION PREFLIGHT</p><h1>先确认“保护谁”。</h1><p>默认全选。点击框取消误检或需要保留的人；拖框补上漏检头部。</p></div><strong id="progress">载入中…</strong></div>
+    <section class="preflight-layout">
+      <aside class="preflight-side">
+        <p class="eyebrow" id="sampleLabel">样本</p><h2 id="countLabel">0 个区域</h2>
+        <p class="keep-note"><strong>必须保持原样：</strong><br><span id="keepPeople">—</span></p>
+        <p class="legend"><span class="dot on"></span>绿色：将保护　<span class="dot off"></span>白色：保持原样</p>
+        <div class="preflight-actions">
+          <button class="ghost" id="selectAll">全部保护</button><button class="ghost" id="clearAll">全部恢复</button>
+          <button class="ghost" id="manualBox">＋ 手动补框</button><button class="primary" id="saveNext">保存并下一张 <span>→</span></button>
+          <div class="nav-row"><button class="ghost" id="previous">上一张</button><button class="ghost" id="next">下一张</button></div>
+        </div>
+        <p id="status">自动检测可能重复或漏掉侧脸、反射和远处小脸。</p>
+      </aside>
+      <div class="preflight-stage"><canvas id="preflightCanvas"></canvas></div>
+    </section>
+  </main><script src="/static/preflight.js"></script>
+</body></html>

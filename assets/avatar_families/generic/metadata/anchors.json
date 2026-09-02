@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "scenes": {
+    "S01_FRONT_NEUTRAL": {
+      "canvas_size": [256, 256],
+      "anchors": {
+        "head_top": [128, 16],
+        "chin": [128, 180],
+        "left_eye_center": [98, 108],
+        "right_eye_center": [158, 108],
+        "nose_tip": [128, 138],
+        "left_cheek": [62, 142],
+        "right_cheek": [194, 142],
+        "neck_left": [110, 212],
+        "neck_right": [146, 212]
+      },
+      "overlay_bbox": [16, 16, 224, 224],
+      "safe_mask_polygon": [[25, 72], [54, 31], [128, 16], [202, 31], [231, 72], [224, 170], [151, 228], [105, 228], [32, 170]]
+    },
+    "S04_L34_NEUTRAL": {
+      "canvas_size": [256, 256],
+      "anchors": {
+        "head_top": [122, 16],
+        "chin": [116, 180],
+        "left_eye_center": [82, 108],
+        "right_eye_center": [139, 108],
+        "nose_tip": [92, 139],
+        "left_cheek": [44, 142],
+        "right_cheek": [177, 142],
+        "neck_left": [101, 212],
+        "neck_right": [137, 212]
+      },
+      "overlay_bbox": [10, 16, 224, 224],
+      "safe_mask_polygon": [[19, 72], [48, 31], [122, 16], [196, 31], [225, 72], [205, 170], [142, 228], [96, 228], [24, 170]]
+    },
+    "S07_R34_NEUTRAL": {
+      "canvas_size": [256, 256],
+      "anchors": {
+        "head_top": [134, 16],
+        "chin": [140, 180],
+        "left_eye_center": [117, 108],
+        "right_eye_center": [174, 108],
+        "nose_tip": [164, 139],
+        "left_cheek": [79, 142],
+        "right_cheek": [212, 142],
+        "neck_left": [119, 212],
+        "neck_right": [155, 212]
+      },
+      "overlay_bbox": [22, 16, 224, 224],
+      "safe_mask_polygon": [[31, 72], [60, 31], [134, 16], [208, 31], [237, 72], [232, 170], [160, 228], [114, 228], [51, 170]]
+    },
+    "S12_BACK": {
+      "canvas_size": [256, 256],
+      "anchors": {
+        "head_top": [128, 16],
+        "chin": [128, 180],
+        "left_eye_center": null,
+        "right_eye_center": null,
+        "nose_tip": null,
+        "left_cheek": [62, 142],
+        "right_cheek": [194, 142],
+        "neck_left": [110, 212],
+        "neck_right": [146, 212]
+      },
+      "overlay_bbox": [16, 16, 224, 224],
+      "safe_mask_polygon": [[25, 72], [54, 31], [128, 16], [202, 31], [231, 72], [224, 170], [151, 228], [105, 228], [32, 170]]
+    }
+  }
+}

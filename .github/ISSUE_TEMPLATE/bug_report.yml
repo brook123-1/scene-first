@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a reproducible problem using sanitized information and synthetic media.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not upload private photos, face/head crops, API keys, `.env` files, or logs/screenshots containing personal data.** Reproduce with a synthetic fixture and redact paths, domains, IDs, and headers.
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: Chrome 140 (or not applicable)
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Processing mode
+      options:
+        - Local-only
+        - Traditional Master
+        - Local Master
+        - Pose-aware playground
+        - Cloudflare/self-hosted
+        - Unsure
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider
+      description: Name only. Never paste a key or account identifier.
+      placeholder: local / openai / gemini / fal / ark / bfl / qwen
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Use synthetic data and include the smallest reliable sequence.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      description: Remove credentials, image data, personal data, absolute paths, private domains, job IDs, and request headers. Leave blank if unsure.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I did not include a private photo, crop, API key, personal data, or unredacted log/screenshot.
+          required: true

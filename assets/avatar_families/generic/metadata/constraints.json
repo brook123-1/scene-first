@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "scenes": {
+    "S01_FRONT_NEUTRAL": {
+      "scene_id": "S01_FRONT_NEUTRAL",
+      "yaw_range_deg": [-15, 15],
+      "pitch_range_deg": [-15, 15],
+      "roll_range_deg": [-35, 35],
+      "min_head_size_px": 48,
+      "max_head_size_px": 512,
+      "visibility_min": 0.45,
+      "crop_tolerance": 0.2,
+      "max_occlusion_score": 0.55
+    },
+    "S04_L34_NEUTRAL": {
+      "scene_id": "S04_L34_NEUTRAL",
+      "yaw_range_deg": [-50, -15],
+      "pitch_range_deg": [-15, 15],
+      "roll_range_deg": [-35, 35],
+      "min_head_size_px": 48,
+      "max_head_size_px": 512,
+      "visibility_min": 0.45,
+      "crop_tolerance": 0.2,
+      "max_occlusion_score": 0.55
+    },
+    "S07_R34_NEUTRAL": {
+      "scene_id": "S07_R34_NEUTRAL",
+      "yaw_range_deg": [15, 50],
+      "pitch_range_deg": [-15, 15],
+      "roll_range_deg": [-35, 35],
+      "min_head_size_px": 48,
+      "max_head_size_px": 512,
+      "visibility_min": 0.45,
+      "crop_tolerance": 0.2,
+      "max_occlusion_score": 0.55
+    },
+    "S12_BACK": {
+      "scene_id": "S12_BACK",
+      "yaw_range_deg": [-180, 180],
+      "pitch_range_deg": [-15, 15],
+      "roll_range_deg": [-35, 35],
+      "min_head_size_px": 48,
+      "max_head_size_px": 512,
+      "visibility_min": 0.45,
+      "crop_tolerance": 0.2,
+      "max_occlusion_score": 0.55
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>批次检查 · Scene First</title><link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .review-main{max-width:1500px;margin:0 auto;padding:52px 24px}.run-meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);margin:16px 0 34px}.run-meta span{padding:7px 10px;border:1px solid var(--line);background:var(--panel);font-size:12px}.run-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.run-card{border:1px solid var(--line);background:var(--panel);padding:16px}.run-card h2{margin:0 0 10px;font-size:18px}.result-meta{font-size:12px;color:var(--muted);margin:0 0 12px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pair figure{margin:0}.pair img{display:block;width:100%;max-height:460px;object-fit:contain;background:#dedfd9;cursor:zoom-in}.pair figcaption{font-size:11px;color:var(--muted);padding:6px 0}.empty{padding:50px;border:1px dashed var(--line);text-align:center}@media(max-width:780px){.run-grid,.pair{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">SF</span><span><strong>Scene First</strong><small>全量处理结果检查</small></span></a></header>
+  <main class="review-main"><p class="eyebrow">BATCH VISUAL REVIEW</p><h1 style="font-size:clamp(42px,7vw,76px);margin:8px 0">逐图检查<br><em>隐私保护结果。</em></h1><div id="meta" class="run-meta"></div><div id="root" class="empty">正在读取批次结果…</div></main>
+  <script src="/static/batch-review.js?v=20260723"></script>
+</body>
+</html>

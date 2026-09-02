@@ -1,0 +1,5 @@
+The file `model_assets/person_detection_mediapipe_2023mar.onnx` is distributed
+under the Apache License, Version 2.0. The unmodified license text is available
+in the repository root at `LICENSE` and from:
+
+https://github.com/opencv/opencv_zoo/blob/main/models/person_detection_mediapipe/LICENSE

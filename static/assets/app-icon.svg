@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Scene First placeholder icon">
+  <rect width="512" height="512" rx="96" fill="#102a45"/>
+  <path d="M256 72 425 138v153c0 70-69 127-169 165C156 418 87 361 87 291V138Z" fill="#eafbf7" stroke="#74d9c3" stroke-width="18" stroke-linejoin="round"/>
+  <circle cx="256" cy="200" r="61" fill="#102a45"/>
+  <rect x="158" y="251" width="196" height="70" rx="28" fill="#74d9c3"/>
+</svg>

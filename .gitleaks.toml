@@ -1,0 +1,12 @@
+title = "Scene First secret scanning configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Avatar manifest scene anchor field names are schema keys, not credentials"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''^assets/avatar_families/generic/manifest\.json$''']
+regexes = ['''"(?:anchor|constraint)_key"\s*:\s*"S[0-9]{2}_[A-Z0-9_]+"''']

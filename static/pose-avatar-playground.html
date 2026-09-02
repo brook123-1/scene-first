@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pose-aware Avatar Overlay · Playground</title>
+  <link rel="stylesheet" href="/static/pose-avatar-playground.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="workbench">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">P2 / LOCAL PLAYGROUND</p>
+        <h1>Pose-aware<br><em>Avatar Overlay</em></h1>
+      </div>
+      <div class="masthead-status">
+        <span class="pulse"></span>
+        <span>本地实验台</span>
+        <strong id="caseCounter">— / —</strong>
+      </div>
+    </header>
+
+    <section class="stage" aria-label="照片预览区">
+      <div class="stage-toolbar">
+        <div class="case-nav">
+          <button id="previous" class="nav-button" type="button" aria-label="上一张">←</button>
+          <div>
+            <span class="micro">CURRENT CASE</span>
+            <strong id="caseId">LOADING</strong>
+          </div>
+          <button id="next" class="nav-button" type="button" aria-label="下一张">→</button>
+        </div>
+        <div class="view-switch" role="group" aria-label="预览模式">
+          <button type="button" data-view="original">Original</button>
+          <button type="button" data-view="split" class="active">Split</button>
+          <button type="button" data-view="composite">Composite</button>
+        </div>
+      </div>
+
+      <div id="imageStage" class="image-stage view-split">
+        <figure class="image-panel original-panel">
+          <figcaption><span>01</span> 原图</figcaption>
+          <div class="image-well"><img id="originalImage" alt="原始测试照片"></div>
+        </figure>
+        <figure class="image-panel composite-panel">
+          <figcaption><span>02</span> Avatar 合成</figcaption>
+          <div class="image-well">
+            <img id="compositeImage" alt="Avatar 合成结果">
+            <div id="rendering" class="rendering" hidden><span></span>RENDERING</div>
+          </div>
+        </figure>
+      </div>
+      <div id="message" class="message" role="status"></div>
+    </section>
+
+    <aside class="controls" aria-label="Playground 控制台">
+      <div class="control-head">
+        <span>CONTROL / 02</span>
+        <button id="reset" type="button">RESET ↺</button>
+      </div>
+
+      <label class="field">
+        <span>Avatar family</span>
+        <select id="family"></select>
+      </label>
+
+      <fieldset class="field fitting">
+        <legend>Fitting experiment</legend>
+        <label><input type="radio" name="fitting" value="face-primary" checked><span><b>Face primary</b><small>face anchors only</small></span></label>
+        <label><input type="radio" name="fitting" value="two-stage"><span><b>Two-stage</b><small>head + neck patch</small></span></label>
+      </fieldset>
+
+      <label class="field">
+        <span>Scene <i>DEBUG</i></span>
+        <select id="scene"><option value="">Auto / metadata yaw range</option></select>
+      </label>
+
+      <div class="tuning">
+        <div class="tuning-title"><span>Manual tuning</span><small>只影响当前预览</small></div>
+        <label><span>Scale</span><output id="scaleValue">1.00×</output><input id="scale" type="range" min="0.50" max="1.75" step="0.01" value="1"></label>
+        <label><span>X offset</span><output id="xValue">0 px</output><input id="xOffset" type="range" min="-300" max="300" step="1" value="0"></label>
+        <label><span>Y offset</span><output id="yValue">0 px</output><input id="yOffset" type="range" min="-300" max="300" step="1" value="0"></label>
+        <label><span>Rotation</span><output id="rotationValue">0°</output><input id="rotation" type="range" min="-45" max="45" step="0.5" value="0"></label>
+      </div>
+
+      <section class="telemetry">
+        <div class="telemetry-title"><span>AUTO TELEMETRY</span><span id="forcedFlag" class="flag" hidden>FORCED PREVIEW</span></div>
+        <dl>
+          <div><dt>Yaw</dt><dd id="yaw">—</dd></div>
+          <div><dt>Roll</dt><dd id="roll">—</dd></div>
+          <div class="wide"><dt>Scene</dt><dd id="sceneValue">—</dd></div>
+          <div class="wide"><dt>Head bbox</dt><dd id="bbox">—</dd></div>
+          <div class="wide"><dt>Production route</dt><dd id="route">—</dd></div>
+          <div class="wide"><dt>Preview route</dt><dd id="previewRoute">—</dd></div>
+          <div><dt>Head stage</dt><dd id="headStage">—</dd></div>
+          <div><dt>Neck stage</dt><dd id="neckStage">—</dd></div>
+        </dl>
+        <details>
+          <summary>Debug coverage</summary>
+          <pre id="coverage">—</pre>
+        </details>
+      </section>
+    </aside>
+
+    <footer>
+      <span>← / → 切换照片</span>
+      <span>R 重置微调</span>
+      <span>Playground only · production router untouched</span>
+    </footer>
+  </main>
+  <script src="/static/pose-avatar-playground.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Scene First · 成本账本</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">SF</span><span><strong>Scene First</strong><small>成本账本</small></span></a><nav><a href="/">返回工作台</a><a href="/settings">API 设置</a></nav></header>
+  <main class="app-shell cost-page">
+    <section class="intro"><p class="eyebrow">OPERATIONS · LOCAL ONLY</p><h1>每一次生成，<em>都要算得清楚。</em></h1><p>从现在开始记录模型、人物数、成功、回退、重试、耗时与调用时的价格参考。这里不保存照片、提示词或 API Key。</p></section>
+    <section class="cost-board" aria-live="polite">
+      <div class="cost-note" id="costNote">正在读取本地账本…</div>
+      <div class="cost-grid" id="costCards"></div>
+      <div class="cost-table-wrap"><h2>按模型拆分</h2><table><thead><tr><th>模型</th><th>成功生成</th><th>安全回退</th><th>平均耗时</th><th>价格参考</th></tr></thead><tbody id="costRows"></tbody></table></div>
+      <p class="cost-help">“参考成本”来自调用时的公开价格或你的本地配置，并非供应商最终账单。方舟 Agent Plan 记录为额度消耗；待未来按量付费或拿到供应商账单后，再做对账。</p>
+    </section>
+  </main>
+  <script src="/static/costs.js" defer></script>
+</body>
+</html>

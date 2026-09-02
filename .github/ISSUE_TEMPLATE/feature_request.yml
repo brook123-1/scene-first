@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a scoped improvement and explain its privacy boundary.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not upload private photos, API keys, personal data, proprietary model weights, or screenshots from `.local`. Use synthetic examples only.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user problem exists today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful change, not an implementation dump.
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy and data-flow impact
+      description: What image data, metadata, credentials, storage, or external services would be added or changed?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: This request contains no private photo, API key, personal data, or license-unclear asset.
+          required: true

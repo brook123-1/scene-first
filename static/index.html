@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06111f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="发布照片前，自动检查并保护画面中的路人隐私。">
+  <title>Scene First｜发布前的路人隐私保护</title>
+  <link rel="manifest" href="/static/manifest.webmanifest">
+  <link rel="icon" href="/static/assets/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/assets/app-icon-192.png">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Scene First 首页"><span class="brand-mark">SF</span><span><strong>Scene First</strong><small>发布前的路人隐私保护</small></span></a>
+    <nav><button id="installApp" class="install-action hidden" type="button">安装到手机</button><a class="lab-only" href="/settings">API 设置</a><a class="lab-only" href="/costs">成本账本</a><a href="#privacy">隐私说明</a></nav>
+  </header>
+
+  <div class="browser-notice hidden" id="browserNotice"><span>当前是社交平台内置浏览器；若选图或保存失败，请用右上角菜单在系统浏览器打开。</span><button id="dismissBrowserNotice" type="button" aria-label="关闭提示">×</button></div>
+
+  <main class="app-shell">
+    <section class="intro">
+      <p class="eyebrow">SCENE FIRST · PRIVATE RELEASE</p>
+      <h1>把场景留给照片，<em>把隐私交给我们。</em></h1>
+      <p>裁剪、检查路人、匿名化、保存，一次完成。检测到的人默认保护，你只需要处理例外。</p>
+    </section>
+
+    <section class="workspace" aria-label="照片发布工作台">
+      <div class="canvas-panel">
+        <div class="canvas-toolbar"><span id="fileLabel">还没有选择照片</span><span class="canvas-status"><span id="countLabel">等待开始</span><button id="viewerReset" class="viewer-reset hidden">还原视图</button></span></div>
+        <div class="stage" id="stage">
+          <div class="empty-state" id="emptyState"><span class="empty-kicker">发布前的隐私检查</span><strong>先添加一张照片</strong><small>支持 iPhone 原图 HEIC、JPEG、PNG 与 WebP。不会在这里自动开始处理。</small><button id="emptyUpload" class="empty-upload">从相册添加照片 <span>＋</span></button></div>
+          <canvas id="editorCanvas" class="hidden" aria-label="照片与人物保护区域"></canvas>
+        </div>
+        <div class="stage-note" id="stageNote">添加照片后可先裁剪；检查人物时可双指放大、拖动查看，双击照片即可还原视图。</div>
+      </div>
+
+      <aside class="control-panel">
+        <div class="step active" data-step="1"><span>01</span><div><strong>选择照片与构图</strong><small>JPEG · PNG · WebP · HEIC / HEIF</small></div></div>
+        <label class="upload-box" id="uploadBox">
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif">
+          <span class="upload-icon">＋</span><strong>从相册选择一张照片</strong><small>原文件会转为无元数据工作副本</small>
+        </label>
+        <button id="replacePhoto" class="change-photo hidden">更换照片</button>
+        <div class="compose-actions" id="composeActions">
+          <button id="openPreCrop" class="ghost" disabled>调整构图</button>
+          <button id="detectButton" class="primary compact" disabled>开始检查路人 <span>→</span></button>
+        </div>
+        <p class="hint" id="cropHint">你可以直接检查，也可以先裁剪、旋转或换一个发布比例。</p>
+
+        <div id="reviewControls" class="hidden">
+          <div class="step disabled-step" data-step="2"><span>02</span><div><strong>确认保护对象</strong><small>默认保护所有检测到的人</small></div></div>
+          <div class="selection-actions">
+            <button id="selectAll" class="ghost" disabled>全部保护</button>
+            <button id="clearAll" class="ghost" disabled>全部恢复</button>
+            <button id="manualBox" class="ghost" disabled>＋ 补一个漏检头部</button>
+            <button id="adjustBox" class="ghost" disabled>调整一个人物框</button>
+          </div>
+          <p class="hint" id="selectionHint">自动检查完成后，点击人物框可取消保护自己或朋友；遗漏时可手动补框。</p>
+
+          <div class="step disabled-step" data-step="3"><span>03</span><div><strong>选择保护方式</strong><small>先保证安全，再追求自然</small></div></div>
+          <div class="mode-grid">
+            <label class="mode-card selected"><input type="radio" name="mode" value="anime" checked><span class="mode-preview anime">◒</span><strong>AI 插画匿名化</strong><small>保留发型、姿态与光线，替换真实身份</small></label>
+            <label class="mode-card"><input type="radio" name="mode" value="safe"><span class="mode-preview safe">●</span><strong>安全遮挡</strong><small>不生成；适合低置信度或希望立即完成的情况</small></label>
+          </div>
+          <div class="safe-cover-picker hidden" id="safeCoverPicker" aria-label="选择安全遮挡头像">
+            <div class="safe-cover-heading"><span>选择一个安全遮挡头像</span><small>自动贴合每个已选头部；场景和服装保持原样</small></div>
+            <div class="safe-cover-list" id="safeCoverList">
+              <button class="safe-cover-option selected" type="button" data-cover-id="bald-bearded"><img src="/static/assets/safe-covers/bald-bearded.png" alt="几何遮罩 1"><span>几何遮罩 1</span></button>
+              <button class="safe-cover-option" type="button" data-cover-id="graduate"><img src="/static/assets/safe-covers/graduate.png" alt="几何遮罩 2"><span>几何遮罩 2</span></button>
+              <button class="safe-cover-option" type="button" data-cover-id="architect"><img src="/static/assets/safe-covers/architect.png" alt="几何遮罩 3"><span>几何遮罩 3</span></button>
+              <button class="safe-cover-option" type="button" data-cover-id="office"><img src="/static/assets/safe-covers/office.png" alt="几何遮罩 4"><span>几何遮罩 4</span></button>
+              <button class="safe-cover-option" type="button" data-cover-id="programmer"><img src="/static/assets/safe-covers/programmer.png" alt="几何遮罩 5"><span>几何遮罩 5</span></button>
+              <button class="safe-cover-option" type="button" data-cover-id="blue-collar"><img src="/static/assets/safe-covers/blue-collar.png" alt="几何遮罩 6"><span>几何遮罩 6</span></button>
+            </div>
+          </div>
+          <label class="field lab-only" id="providerField"><span>生成引擎</span><select id="provider"><option value="local">本地原创插画</option></select></label>
+          <label class="consent hidden" id="cloudConsent"><input id="cloudConsentInput" type="checkbox"><span>我确认拥有处理这张照片的必要权利，并同意只将所选头部及其必要上下文发送至所选服务。</span></label>
+          <button id="processButton" class="primary" disabled>确认并开始保护 <span>→</span></button>
+          <div class="job-status" id="jobStatus" aria-live="polite"></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="result-section hidden" id="resultSection">
+      <div class="section-heading"><p class="eyebrow">发布前复查</p><h2>这张图，已经准备好了。</h2><p id="resultSummary"></p></div>
+      <div class="publish-check" id="publishCheck"></div>
+      <div class="ai-fallback-banner hidden" id="aiFallbackBanner" role="status">
+        <div class="ai-fallback-copy">
+          <strong>AI 插画失败，已安全遮挡</strong>
+          <span>以下人物未完成 AI 插画，系统已回退到安全遮挡。你可以查看原因后重试 AI。</span>
+        </div>
+        <ul class="ai-fallback-reasons" id="aiFallbackReasons"></ul>
+        <button id="retryAiButton" class="primary compact" type="button">重试 AI</button>
+      </div>
+      <div class="publish-decision hidden" id="publishDecision"><span>这张成品达到你的发布标准吗？</span><button id="markPublishable" class="ghost">愿意发布</button><button id="markNeedsRetry" class="ghost">还需重试</button></div>
+      <div class="compare" id="compareBox">
+        <img id="beforeImage" alt="处理前照片">
+        <div class="after-layer" id="afterLayer"><img id="afterImage" alt="处理后照片"></div>
+        <div class="compare-line" id="compareLine"><span>↔</span></div>
+        <input id="compareRange" type="range" min="0" max="100" value="50" aria-label="处理前后对比">
+        <span class="before-label">处理后</span><span class="after-label">处理前</span>
+      </div>
+        <div class="result-actions">
+         <button id="reloadResult" class="ghost hidden">重新加载成品</button>
+         <button id="retryButton" class="ghost">再生成一次</button>
+        <button id="openResultCrop" class="ghost">调整构图</button>
+        <button id="downloadJpeg" class="ghost">保存 JPEG</button>
+        <button id="downloadPng" class="primary">保存无元数据 PNG</button>
+        <button id="shareButton" class="primary share hidden">系统分享</button>
+      </div>
+    </section>
+
+    <section class="privacy-section" id="privacy">
+      <p class="eyebrow">发布检查，不是绝对承诺</p>
+      <h2>降低可识别风险，<br>保留照片原本的氛围。</h2>
+      <div class="privacy-grid">
+        <article><span>01</span><h3>先裁剪再检测</h3><p>未进入构图的区域不会参与人物识别与生成，减少不必要的处理。</p></article>
+        <article><span>02</span><h3>默认全保护</h3><p>检测到的人默认受保护；你只处理例外，并可补上远处或侧脸漏检。</p></article>
+        <article><span>03</span><h3>导出不带位置</h3><p>浏览器导出与服务端导出都会移除图片元数据；发布前仍请放大复查所有可见面部。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <div class="crop-sheet hidden" id="cropSheet" role="dialog" aria-modal="true" aria-labelledby="cropTitle">
+    <div class="crop-sheet-inner">
+      <div class="sheet-header"><button id="cancelCrop" class="text-button">取消</button><div><strong id="cropTitle">调整构图</strong><small id="cropSubhead">拖动边框或图片，保留你想展示的部分</small></div><button id="applyCrop" class="text-button confirm">完成</button></div>
+      <div class="crop-stage" id="cropStage"><canvas id="cropCanvas" aria-label="裁剪编辑器"></canvas></div>
+      <div class="crop-controls">
+        <div class="ratio-row" aria-label="裁剪比例">
+          <button data-ratio="free" class="ratio active">自由</button><button data-ratio="original" class="ratio">原比例</button><button data-ratio="1" class="ratio">1:1</button><button data-ratio="0.8" class="ratio">4:5</button><button data-ratio="0.75" class="ratio">3:4</button><button data-ratio="0.5625" class="ratio">9:16</button><button data-ratio="1.7777778" class="ratio">16:9</button>
+        </div>
+        <div class="crop-tool-row"><button id="rotateCrop" class="crop-tool">↻<span>旋转</span></button><button id="flipCrop" class="crop-tool">↔<span>翻转</span></button><button id="resetCrop" class="crop-tool">⟲<span>还原</span></button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-dock" id="mobileDock"><button id="mobileSecondary" class="ghost" disabled>调整构图</button><button id="mobilePrimary" class="primary" disabled>开始 <span>→</span></button></div>
+  <footer><span>Scene First · Privacy Web App</span><span>不将原图用于训练 · 导出不保留 EXIF</span></footer>
+  <script src="/static/detection-client.js" defer></script>
+  <script src="/static/local-master.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

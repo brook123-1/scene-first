@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "family_id": "generic",
+  "version": "0.1.0",
+  "style_group": "p0_geometry_fixture",
+  "privacy_mode": "non_identity_preserving",
+  "supported_scenes": [
+    "S01_FRONT_NEUTRAL",
+    "S04_L34_NEUTRAL",
+    "S07_R34_NEUTRAL",
+    "S12_BACK"
+  ],
+  "supported_expressions": ["NEUTRAL"],
+  "supported_accessories": [],
+  "default_priority": 100,
+  "enabled": true,
+  "anchors_file": "metadata/anchors.json",
+  "constraints_file": "metadata/constraints.json",
+  "scenes": {
+    "S01_FRONT_NEUTRAL": {
+      "asset": "runtime_png/front.png",
+      "anchor_key": "S01_FRONT_NEUTRAL",
+      "constraint_key": "S01_FRONT_NEUTRAL"
+    },
+    "S04_L34_NEUTRAL": {
+      "asset": "runtime_png/left_34.png",
+      "anchor_key": "S04_L34_NEUTRAL",
+      "constraint_key": "S04_L34_NEUTRAL"
+    },
+    "S07_R34_NEUTRAL": {
+      "asset": "runtime_png/right_34.png",
+      "anchor_key": "S07_R34_NEUTRAL",
+      "constraint_key": "S07_R34_NEUTRAL"
+    },
+    "S12_BACK": {
+      "asset": "runtime_png/back.png",
+      "anchor_key": "S12_BACK",
+      "constraint_key": "S12_BACK"
+    }
+  }
+}

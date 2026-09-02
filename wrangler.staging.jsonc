@@ -1,0 +1,36 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "scene-first-staging",
+  "main": "cloudflare/worker.ts",
+  "compatibility_date": "2026-07-27",
+  "workers_dev": true,
+  "preview_urls": true,
+  "vars": {
+    "SCENE_FIRST_LOCAL_MASTER": "1"
+  },
+  "containers": [
+    {
+      "class_name": "SceneFirstContainer",
+      "image": "./Dockerfile",
+      "instance_type": "basic",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SCENE_FIRST_CONTAINER",
+        "class_name": "SceneFirstContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SceneFirstContainer"]
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

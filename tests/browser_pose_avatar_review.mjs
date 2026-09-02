@@ -1,0 +1,21 @@
+import { chromium } from 'playwright';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+const gallery = path.resolve('.local/app/pose-avatar-p1/gallery.html');
+const browser = await chromium.launch({ headless: true, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
+await page.goto(pathToFileURL(gallery).href);
+await page.waitForSelector('#caseId');
+if ((await page.textContent('#caseId')) !== 'p1-001') throw new Error('review queue did not load');
+await page.locator('input[name="placement"][value="PASS"]').check();
+await page.locator('input[name="route"][value="STANDARD_ELIGIBLE"]').check();
+await page.locator('#reviewed').check();
+await page.waitForFunction(() => document.querySelector('#status').textContent.includes('autosaved'));
+await page.reload();
+await page.waitForSelector('#caseId');
+if (!await page.locator('#reviewed').isChecked()) throw new Error('review did not resume from localStorage');
+await page.evaluate(() => localStorage.clear());
+await page.screenshot({ path: path.resolve('.local/app/pose-avatar-p1/review-console-qa.png'), fullPage: true });
+await browser.close();
+console.log('pose avatar review console browser test passed');

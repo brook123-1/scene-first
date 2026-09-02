@@ -1,0 +1,51 @@
+{
+  "name": "scene-first-privacy-toolkit",
+  "private": true,
+  "scripts": {
+    "app:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup.ps1",
+    "app:start": "powershell -ExecutionPolicy Bypass -File scripts/start.ps1",
+    "app:test": "powershell -ExecutionPolicy Bypass -File scripts/test.ps1",
+    "app:test-browser": "node tests/browser_detection_client.mjs",
+    "app:test-master-browser": "node tests/browser_master_upload.mjs",
+    "app:test-local-master-browser": "node tests/browser_local_master.mjs",
+    "app:test-local-master-e2e": "node tests/browser_app_local_master_e2e.mjs",
+    "app:test-interactions-browser": "node tests/browser_box_crop_interactions.mjs",
+    "app:benchmark-master": ".venv\\Scripts\\python.exe scripts\\benchmark_master_upload.py",
+    "app:qa": "powershell -ExecutionPolicy Bypass -File scripts/qa.ps1",
+    "app:audit-samples": ".venv\\Scripts\\python.exe scripts\\audit_samples.py",
+    "app:audit-detection": ".venv\\Scripts\\python.exe scripts\\audit_detection.py",
+    "app:report": ".venv\\Scripts\\python.exe scripts\\report_benchmark.py",
+    "app:result-sheet": ".venv\\Scripts\\python.exe scripts\\result_contact_sheet.py",
+    "app:build-pose-avatar-assets": ".venv\\Scripts\\python.exe scripts\\build_pose_avatar_assets.py",
+    "app:validate-avatar": ".venv\\Scripts\\python.exe scripts\\validate_pose_avatar_family.py",
+    "app:debug-pose-avatar": ".venv\\Scripts\\python.exe scripts\\run_pose_avatar_debug.py --output debug\\pose-avatar-p0",
+    "app:benchmark-pose-avatar:init": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py init --count 48",
+    "app:benchmark-pose-avatar:run": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py run",
+    "app:benchmark-pose-avatar:validate": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py validate",
+    "app:benchmark-pose-avatar:gallery": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py gallery",
+    "app:benchmark-pose-avatar:report": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py report",
+    "app:benchmark-pose-avatar:calibrate": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py calibrate",
+    "app:benchmark-pose-avatar:human-baseline": ".venv\\Scripts\\python.exe scripts\\pose_avatar_benchmark.py human-baseline",
+    "app:test-pose-avatar-review": "node tests/browser_pose_avatar_review.mjs",
+    "app:test-pose-avatar-playground": "node tests/browser_pose_avatar_playground.mjs",
+    "app:generate-placeholders": ".venv\\Scripts\\python.exe scripts\\generate_public_placeholders.py",
+    "app:check-placeholders": ".venv\\Scripts\\python.exe scripts\\generate_public_placeholders.py --check",
+    "repo:export-public": "powershell -ExecutionPolicy Bypass -File scripts/export-public-repo.ps1",
+    "cf:check": "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --env-file cloudflare/.env.deploy --containers-rollout=none",
+    "cf:typecheck": "node node_modules/typescript/bin/tsc -p tsconfig.cloudflare.json",
+    "cf:dev": "node node_modules/wrangler/bin/wrangler.js dev --env-file cloudflare/.env.deploy",
+    "cf:deploy": "node node_modules/wrangler/bin/wrangler.js deploy --env-file cloudflare/.env.deploy",
+    "cf:check:staging": "node node_modules/wrangler/bin/wrangler.js deploy --config wrangler.staging.jsonc --dry-run --env-file cloudflare/.env.deploy --containers-rollout=none",
+    "cf:deploy:staging": "node node_modules/wrangler/bin/wrangler.js deploy --config wrangler.staging.jsonc --env-file cloudflare/.env.deploy",
+    "cf:verify:staging:p05": "node scripts/verify_staging_p05.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260727.1",
+    "playwright": "^1.55.0",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.121.0"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "^0.3.7"
+  }
+}

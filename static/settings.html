@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>API 设置 · Scene First</title><link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .settings-main{max-width:980px;margin:auto;padding:70px 5vw}.settings-main h1{font:700 clamp(48px,7vw,82px)/.95 Georgia,"Songti SC",serif;margin:10px 0}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:34px}.provider-card{padding:24px;border:1px solid var(--line);background:var(--panel)}.provider-card h2{margin:0 0 8px}.provider-card p{min-height:48px;color:var(--muted);line-height:1.6}.provider-card label{display:block;font-size:12px;margin-top:14px}.provider-card input,.provider-card select{width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);background:#fff}.provider-card button{width:100%;margin-top:18px}.status{font-size:12px;margin-top:12px;color:var(--muted)}.security{margin-top:28px;padding:18px;border-left:4px solid var(--lime);background:#e7eee4;line-height:1.7}@media(max-width:700px){.settings-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">SF</span><span><strong>Scene First</strong><small>仅本机 API 设置</small></span></a><a href="/">返回工作台</a></header>
+  <main class="settings-main">
+    <p class="eyebrow">LOCAL API CONFIGURATION</p><h1>接入真正的<br><em>图像编辑模型。</em></h1>
+    <p class="lead">密钥只会保存到本机的 <code>.env.local</code>，保存后不会回显，也不会被上传到飞书或聊天。</p>
+    <div class="settings-grid" id="providers">正在读取配置…</div>
+    <div class="security"><strong>模型切换原则：</strong>fal.ai 是供应商，不是一款模型。一个 Key 可在已验证的编辑模型间切换；工作台会显示“fal.ai · 当前模型”。不开放任意端点输入，以免不同参数格式破坏局部上传和本地掩码合成的隐私承诺。</div>
+  </main>
+  <script src="/static/settings.js?v=20260721-ark"></script>
+</body>
+</html>
