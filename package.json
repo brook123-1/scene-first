@@ -40,7 +40,7 @@
     "cf:verify:staging:p05": "node scripts/verify_staging_p05.mjs"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260727.1",
+    "@cloudflare/workers-types": "^5.20260830.1",
     "playwright": "^1.55.0",
     "typescript": "^7.0.2",
     "wrangler": "^4.121.0"
