@@ -1,5 +1,5 @@
 fastapi==0.139.2
-cairosvg==2.8.2
+cairosvg==2.9.0
 httpx==0.28.1
 numpy==2.2.6
 opencv-python-headless==4.12.0.88
